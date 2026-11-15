@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F17"/>
+      <stop offset="100%" stop-color="#161E2E"/>
+    </linearGradient>
+    <linearGradient id="magic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="50%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- App Icon Background -->
+  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
+  <rect width="508" height="508" x="2" y="2" rx="106" fill="none" stroke="#1F2937" stroke-width="4"/>
+  
+  <!-- Candlesticks / Growth Pillars -->
+  <!-- Pillar 1 -->
+  <line x1="140" y1="210" x2="140" y2="380" stroke="#10B981" stroke-width="6" stroke-linecap="round"/>
+  <rect x="122" y="240" width="36" height="110" rx="8" fill="#10B981"/>
+  
+  <!-- Pillar 2 -->
+  <line x1="256" y1="140" x2="256" y2="400" stroke="#06B6D4" stroke-width="6" stroke-linecap="round"/>
+  <rect x="238" y="170" width="36" height="180" rx="8" fill="#06B6D4"/>
+  
+  <!-- Pillar 3 (Magic Peak) -->
+  <line x1="372" y1="80" x2="372" y2="360" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+  <rect x="354" y="110" width="36" height="200" rx="8" fill="#F59E0B"/>
+  
+  <!-- Magic Trend Line -->
+  <path d="M 120 300 Q 240 220, 390 100" fill="none" stroke="url(#magic)" stroke-width="12" stroke-linecap="round" filter="url(#glow)"/>
+  
+  <!-- Magic Formula Star -->
+  <polygon points="390,75 397,92 415,95 401,107 405,125 390,115 375,125 379,107 365,95 383,92" fill="#FBBF24" filter="url(#glow)"/>
+  
+  <!-- Subtitle Text inside Icon -->
+  <text x="256" y="445" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="34" fill="#F1F5F9" text-anchor="middle" letter-spacing="2">STOCK MAGIC</text>
+  <text x="256" y="475" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="20" fill="#94A3B8" text-anchor="middle" letter-spacing="1">신마법공식 PWA</text>
+</svg>

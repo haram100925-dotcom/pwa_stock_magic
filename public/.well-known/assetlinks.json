@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "web.stock.com.stock",
+      "sha256_cert_fingerprints": [
+        "AD:DD:CD:AC:B4:6C:A3:E3:FD:CA:3A:D0:D8:85:70:87:5B:5A:CC:27:80:55:DE:F9:65:3B:74:68:3F:7A:2C:A5",
+        "84:B1:46:18:EC:44:F3:1F:1E:3E:96:E0:DE:93:7A:30:7C:28:57:92:4F:7E:3F:60:6E:B1:03:45:B1:02:A7:46"
+      ]
+    }
+  }
+]

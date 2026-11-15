@@ -1,0 +1,6 @@
+{
+  "name": "신마법공식 주식 가치투자 PWA",
+  "description": "신 마법공식(PBR·GP/A), 벤저민 그레이엄 가치투자 계산기 및 실시간 랭킹을 제공하는 마법공식 주식투자 PWA 애플리케이션",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

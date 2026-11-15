@@ -1,0 +1,31 @@
+{
+  "packageId": "web.stock.com.stock",
+  "host": "cronya.pe.kr",
+  "name": "신마법공식 주식 가치투자",
+  "launcherName": "신마법공식",
+  "displayMode": "standalone",
+  "themeColor": "#0B0F17",
+  "themeColorDark": "#0B0F17",
+  "navigationColor": "#0B0F17",
+  "navigationColorDark": "#0B0F17",
+  "navigationDividerColor": "#00000000",
+  "navigationDividerColorDark": "#00000000",
+  "backgroundColor": "#0B0F17",
+  "enableNotifications": false,
+  "startUrl": "/stock/main.php",
+  "iconUrl": "https://cronya.pe.kr/pwa-512x512.png",
+  "maskableIconUrl": "https://cronya.pe.kr/pwa-maskable-512x512.png",
+  "appVersionName": "2.0.0",
+  "appVersionCode": 20,
+  "signingKey": {
+    "path": "./release_stock_key_123789.jks",
+    "alias": "release_stock"
+  },
+  "splashScreenFadeOutDuration": 300,
+  "enableSiteSettingsShortcut": false,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://cronya.pe.kr/stock/",
+  "minSdkVersion": 21,
+  "generatorApp": "bubblewrap-cli"
+}
