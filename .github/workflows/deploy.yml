@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    name: Build & Upload dist to /html/stock/
+    name: Build & Safe Upload PWA + PHP to /html/stock/
     runs-on: ubuntu-latest
 
     steps:
@@ -27,23 +27,28 @@ jobs:
       - name: Build production bundle
         run: npm run build
 
-      - name: Deploy dist/ to /html/stock/ via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./dist/
-          server-dir: /html/stock/
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            dist.zip
-            **/dist.zip
-            assets/aistudio/**
-            .well-known/**
-            .htaccess
+      - name: Clean excluded PWA files before upload
+        run: |
+          rm -rf dist/dist.zip dist/assets/aistudio dist/.well-known dist/.htaccess
+
+      - name: Upload ./stock PHP & ./dist PWA to /html/stock/ via lftp (NO delete, exclude DB config)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER" -e "
+            set ftp:ssl-allow no;
+            set ftp:passive-mode on;
+            set net:timeout 20;
+            set net:max-retries 3;
+            mirror --reverse --no-perms --verbose \
+              --exclude-glob '*accsesDB.php' \
+              --exclude-glob 'index.html' \
+              --exclude-glob '*.log' \
+              --exclude-glob '.ftp-deploy-sync-state.json' \
+              ./stock /html/stock;
+            mirror --reverse --no-perms --verbose ./dist /html/stock;
+            bye
+          "

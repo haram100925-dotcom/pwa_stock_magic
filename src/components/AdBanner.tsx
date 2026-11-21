@@ -159,25 +159,25 @@ export const AdBanner: React.FC<AdBannerProps> = ({ bannerKey = 0, onAdMobReady 
             </button>
           </div>
 
-          {/* Full-Viewport Ad Creative Container (Fills 100% remaining height & width) */}
+          {/* Full-Viewport Ad Creative Container (Prioritizes vertical/rectangle creative over thin horizontal banner) */}
           <div
             ref={modalAdContainerRef}
-            className="flex-1 w-full h-full flex items-center justify-center bg-[#0B0F17] p-2 overflow-hidden"
+            className="flex-1 w-full flex flex-col items-center justify-center bg-[#0B0F17] p-4 overflow-y-auto"
             style={{ width: '100%', height: 'calc(100vh - 48px)' }}
           >
-            <ins
-              className="adsbygoogle"
-              style={{
-                display: 'block',
-                width: '100%',
-                height: '100%',
-                minHeight: 'calc(100vh - 64px)',
-              }}
-              data-ad-client={adClientId}
-              data-ad-slot={adSlotId}
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
+            <div className="w-full max-w-[360px] min-h-[280px] flex items-center justify-center rounded-xl bg-slate-900/60 border border-slate-800/80 p-2">
+              <ins
+                className="adsbygoogle"
+                style={{
+                  display: 'block',
+                  width: '100%',
+                }}
+                data-ad-client={adClientId}
+                data-ad-slot={adSlotId}
+                data-ad-format="vertical, rectangle"
+                data-full-width-responsive="false"
+              />
+            </div>
           </div>
         </div>
       )}

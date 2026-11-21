@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 
 export const ADMOB_INTERSTITIAL_UNIT_ID = 'ca-app-pub-2281115817010682/1881691673';
+const INTERSTITIAL_COUNTDOWN_SECONDS = 10;
 
 declare global {
   interface Window {
@@ -19,7 +20,7 @@ export function useAdMobBridge() {
   const [admobStatus, setAdmobStatus] = useState<string>('Web AdSense / PWA Mode');
   const [interstitialActive, setInterstitialActive] = useState(false);
   const [interstitialKey, setInterstitialKey] = useState(0);
-  const [countdown, setCountdown] = useState(6);
+  const [countdown, setCountdown] = useState(INTERSTITIAL_COUNTDOWN_SECONDS);
 
   const defaultAdClientId = 'ca-pub-2281115817010682';
   const defaultBannerSlot = '2118625088';
@@ -79,8 +80,8 @@ export function useAdMobBridge() {
       }
     }
 
-    // 2. Web / PWA Full-Screen Interstitial Overlay
-    setCountdown(6);
+    // 2. Web / PWA Full-Screen Interstitial Overlay (10s countdown)
+    setCountdown(INTERSTITIAL_COUNTDOWN_SECONDS);
     setInterstitialKey((k) => k + 1);
     setInterstitialActive(true);
     return true;

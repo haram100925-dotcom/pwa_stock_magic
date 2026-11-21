@@ -1,104 +1,92 @@
-            <div data-role="panel" class="jqm-navmenu-panel" data-position="left" data-display="overlay" data-theme="a">
-                        <ul class="jqm-list ui-alt-icon ui-nodisc-icon">
-                        <li data-filtertext="demos homepage" data-icon="home"><a href="/stock/main.php">Home</a></li>
-                         
-                         
-<!--                         <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed"> -->
-<!--                                 <h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"> -->
-<!--                                         <a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d"> -->
-<!--                                                 Controlgroup widget<span class="ui-collapsible-heading-status"> click to expand contents</span> -->
-<!--                                         </a> -->
-<!--                                 </h3> -->
-<!--                                 <div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true"> -->
-<!--                                         <ul> -->
-<!--                                                 <li data-filtertext="controlgroups selectmenu checkboxradio input grouped buttons horizontal vertical"><a href="https://demos.jquerymobile.com/1.4.5/controlgroup/" data-ajax="false">Controlgroup</a></li> -->
-<!--                                                 <li data-filtertext="dynamic controlgroup dynamically add buttons"><a href="/stock/stockList.php" data-ajax="false">전종목 분석</a></li> -->
-<!--                                         </ul> -->
-<!--                                 </div> --> 
-<!--                         </li>  -->
-<!--                         <li data-filtertext="page transitions animated pages popup navigation flip slide fade pop"><a href="/stock/stockList.php" data-ajax="false">전종목 분석(eps)</a></li> -->
-                         
-<!-- 
-  <li data-filtertext="demos homepage" data-icon="user"><a href="/stock/myList.php"  data-ajax="false">나의 관심종목<sepn  style='color:red'>  (NEW)</sepn></a></li> 
-  -->
- 
-                        <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
-                                <h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-                                        <a href="/stock/magicList.php" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
-                                               전종목 분석(PER  ↓)</a><span class="ui-collapsible-heading-status"> click to expand contents</span>
-                                        
-                                </h3>
-                                <div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
-                                        <ul>
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/stockList.php?type=1" data-ajax="false">코스피 전 종목(PER  ↓) </a></li> 
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/stockList.php?type=2" data-ajax="false">코스닥 전 종목(PER  ↓) </a></li> 
-                                        </ul>
-                                </div>
-                        </li>  
-                        <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
-                                <h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-                                        <a href="/stock/magicList.php" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
-                                            <b style='color:red'>신</B>   마법공식 top 100</a><span class="ui-collapsible-heading-status"> click to expand contents</span>
-                                        
-                                </h3>
-                                <div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
-                                        <ul>
-                                        <li data-filtertext="backbone requirejs navigation router"><a href="/stock/magicNewList.php" data-ajax="false" ><b  >전 종목</b> (PBR↓,GP/A↑) </a></li> 
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/magicNewList.php?type=1" data-ajax="false" ><b style="color:red">코스피</b> (PBR↓,GP/A↑) </a></li> 
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/magicNewList.php?type=2" data-ajax="false" style="color:blue"><b style="color:blue">코스닥</b> (PBR↓,GP/A↑) </a></li> 
-                                        </ul>
-                                </div>
-                        </li>    
-                        <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
-                                <h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-                                        <a href="/stock/magicList.php" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
-                                             그레이엄(가치투자)<img src="/stock/include/one2.png" alt="No.1" style="height:34px;vertical-align:middle;margin-right:4px;"></a><span class="ui-collapsible-heading-status"> click to expand contents</span>
-                                        
-                                </h3>
-                                <div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
-                                        <ul>
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/contrarianList.php" data-ajax="false" ><b  >전 종목</b>  </a></li>
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/contrarianList.php?type=1" data-ajax="false" ><b style="color:red">코스피</b>  </a></li> 
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/contrarianList.php?type=2" data-ajax="false" style="color:blue"><b style="color:blue">코스닥</b>  </a></li> 
-                                        </ul>
-                                </div>
-                        </li>   
-                        <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
-                                <h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-                                        <a href="/stock/magicList.php" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
-                                               마법공식 top 100</a><span class="ui-collapsible-heading-status"> click to expand contents</span>
-                                        
-                                </h3>
-                                <div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
-                                        <ul>
-                                        <li data-filtertext="backbone requirejs navigation router"><a href="/stock/magicList.php" data-ajax="false" ><b  >전 종목</b> (PER↓,ROA↑) </a></li> 
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/magicList.php?type=1" data-ajax="false" ><b style="color:red">코스피</b> (PER↓,ROA↑) </a></li> 
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/magicList.php?type=2" data-ajax="false" style="color:blue"><b style="color:blue">코스닥</b> (PER↓,ROA↑) </a></li> 
-                                        </ul>
-                                </div>
-                        </li>                         
- 
-                     <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
-                                <h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-                                        <a href="/stock/magicList.php" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
-                                            피터 린치(이기는 투자)</a><span class="ui-collapsible-heading-status"> click to expand contents</span>
-                                        
-                                </h3>
-                                <div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
-                                        <ul>
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/winList.php" data-ajax="false" ><b  >전 종목</b>  </a></li>
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/winList.php?type=1" data-ajax="false" ><b style="color:red">코스피</b>  </a></li> 
-                                                <li data-filtertext="backbone requirejs navigation router"><a href="/stock/winList.php?type=2" data-ajax="false" style="color:blue"><b style="color:blue">코스닥</b>  </a></li> 
-                                        </ul>
-                                </div>
-                        </li>                          
-   
- <!-- <li data-filtertext="page transitions animated pages popup navigation flip slide fade pop" ><a   style="background-color: #fdf7fa; " href="/stock/resultStock/samPeterLynchResult.php" data-ajax="false"> 피터 린치(이기는 투자)</a></li>   -->    
-                          <li data-filtertext="page transitions animated pages popup navigation flip slide fade pop" >
- <a   style="background-color: #fdf7fa; " href="https://now24.tistory.com/category/%ED%95%B4%EC%99%B8%20%EA%B8%88%EC%9A%A9%20%EA%B2%BD%EC%A0%9C" data-ajax="false">암호화폐 현황 </a></li> 
-                         <?php   	//다음 광고 
-	include("/hosting/windmoter/html/stock/include/AD_250_250.php");?>   
-                                                <li data-filtertext="demos homepage" data-icon="info"><a href="/stock/info.php" data-ajax="false">info</a></li>                      
-                                               <!-- <li data-filtertext="demos homepage" data-icon="user"><a href="/stock/myList.php"  data-ajax="false">나의관심종목</a></li>  -->
-                        </ul> 
-        </div><!-- /panel -->
+<div id="ftDrawerBackdrop" class="ft-backdrop" aria-hidden="true"></div>
+
+<aside id="ftNavDrawer" class="ft-drawer ft-drawer-left" aria-hidden="true" aria-label="투자 전략 메뉴">
+  <div class="ft-drawer-head">
+    <span class="ft-drawer-title">투자 전략 메뉴</span>
+    <button type="button" class="ft-icon-btn" data-ft-close-drawer aria-label="메뉴 닫기">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="ft-drawer-body">
+    <a href="/stock/main.php" class="ft-nav-link">
+      <span>홈 (전략 대시보드)</span>
+      <svg class="ft-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+
+    <div class="ft-accordion is-open">
+      <button type="button" class="ft-accordion-btn">
+        <span><span class="ft-market-kospi">신</span> 마법공식 Top 100</span>
+        <svg class="ft-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="ft-accordion-panel">
+        <a href="/stock/magicNewList.php" class="ft-sub-link"><span>전 종목</span><span class="ft-action-meta">PBR↓ · GP/A↑</span></a>
+        <a href="/stock/magicNewList.php?type=1" class="ft-sub-link"><span class="ft-market-kospi">코스피</span><span class="ft-action-meta">PBR↓ · GP/A↑</span></a>
+        <a href="/stock/magicNewList.php?type=2" class="ft-sub-link"><span class="ft-market-kosdaq">코스닥</span><span class="ft-action-meta">PBR↓ · GP/A↑</span></a>
+      </div>
+    </div>
+
+    <div class="ft-accordion is-open">
+      <button type="button" class="ft-accordion-btn">
+        <span>벤저민 그레이엄 (가치투자)</span>
+        <svg class="ft-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="ft-accordion-panel">
+        <a href="/stock/contrarianList.php" class="ft-sub-link"><span>전 종목</span><span class="ft-action-meta">PER↓ · PBR↓</span></a>
+        <a href="/stock/contrarianList.php?type=1" class="ft-sub-link"><span class="ft-market-kospi">코스피</span><span class="ft-action-meta">가치주</span></a>
+        <a href="/stock/contrarianList.php?type=2" class="ft-sub-link"><span class="ft-market-kosdaq">코스닥</span><span class="ft-action-meta">가치주</span></a>
+      </div>
+    </div>
+
+    <div class="ft-accordion">
+      <button type="button" class="ft-accordion-btn">
+        <span>피터 린치 (이기는 투자)</span>
+        <svg class="ft-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="ft-accordion-panel">
+        <a href="/stock/winList.php" class="ft-sub-link"><span>전 종목</span><span class="ft-action-meta">ROA↑ · ROE↑</span></a>
+        <a href="/stock/winList.php?type=1" class="ft-sub-link"><span class="ft-market-kospi">코스피</span><span class="ft-action-meta">성장가치</span></a>
+        <a href="/stock/winList.php?type=2" class="ft-sub-link"><span class="ft-market-kosdaq">코스닥</span><span class="ft-action-meta">성장가치</span></a>
+      </div>
+    </div>
+
+    <div class="ft-accordion">
+      <button type="button" class="ft-accordion-btn">
+        <span>마법공식 Top 100</span>
+        <svg class="ft-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="ft-accordion-panel">
+        <a href="/stock/magicList.php" class="ft-sub-link"><span>전 종목</span><span class="ft-action-meta">PER↓ · ROA↑</span></a>
+        <a href="/stock/magicList.php?type=1" class="ft-sub-link"><span class="ft-market-kospi">코스피</span><span class="ft-action-meta">PER↓ · ROA↑</span></a>
+        <a href="/stock/magicList.php?type=2" class="ft-sub-link"><span class="ft-market-kosdaq">코스닥</span><span class="ft-action-meta">PER↓ · ROA↑</span></a>
+      </div>
+    </div>
+
+    <div class="ft-accordion">
+      <button type="button" class="ft-accordion-btn">
+        <span>전종목 분석 (PER 낮은순)</span>
+        <svg class="ft-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="ft-accordion-panel">
+        <a href="/stock/stockList.php?type=1" class="ft-sub-link"><span class="ft-market-kospi">코스피 전 종목</span><span class="ft-action-meta">PER↓</span></a>
+        <a href="/stock/stockList.php?type=2" class="ft-sub-link"><span class="ft-market-kosdaq">코스닥 전 종목</span><span class="ft-action-meta">PER↓</span></a>
+      </div>
+    </div>
+
+    <a href="https://now24.tistory.com/category/%ED%95%B4%EC%99%B8%20%EA%B8%88%EC%9A%A9%20%EA%B2%BD%EC%A0%9C" target="_blank" rel="noopener" class="ft-nav-link">
+      <span>해외 금융·암호화폐 현황</span>
+      <svg class="ft-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+
+    <div class="ft-ad-slot">
+      <?php include("/hosting/windmoter/html/stock/include/AD_250_250.php"); ?>
+    </div>
+
+    <a href="/stock/info.php" class="ft-nav-link">
+      <span>서비스 소개</span>
+      <svg class="ft-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+  </div>
+</aside>

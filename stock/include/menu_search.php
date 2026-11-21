@@ -1,125 +1,65 @@
-<style>
-/* General Panel Styling */
-.jqm-search-panel {
-    background-color: #f9f9f9;
-    border-left: 1px solid #ddd;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+<script>
+// 종목 상세 이동
+function stockDitalMove(isNo, isNm) {
+  location.href = "https://cronya.pe.kr/stock/stockDetail.php?isNo=" + isNo + "&isNm=" + isNm;
 }
 
-/* Search Input */
-.jqm-search .ui-filterable .ui-input-search {
-    background-color: #fff;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    box-shadow: none;
-    padding: 5px 10px;
+// 전체 종목 검색 데이터 최초 1회 로드
+var isStockDateTotal = true;
+function stockDateTotal() {
+  if (isStockDateTotal) {
+    $.ajax({
+      type: 'post',
+      dataType: 'text',
+      url: 'https://cronya.pe.kr/stock/include/stockTotalList.php',
+      beforeSend: function () {
+        $('#stockViewTotal').html('<li style="justify-content:center;border:none;"><div class="ft-loader"></div></li>');
+      },
+      success: function (data) {
+        $('#stockViewTotal').html(data);
+        isStockDateTotal = false;
+        var input = document.getElementById('ftGlobalSearchInput');
+        if (input && input.value.trim()) {
+          input.dispatchEvent(new Event('input'));
+        }
+      },
+      error: function () {
+        $('#stockViewTotal').html('<li style="color:#8b95a1;border:none;">종목 데이터를 불러오지 못했습니다.</li>');
+      }
+    });
+  }
 }
+</script>
 
-.jqm-search .ui-input-search input {
-    font-size: 16px;
-    padding: 10px;
-    border: none;
-    background: transparent;
-}
+<aside id="ftSearchDrawer" class="ft-drawer ft-drawer-right" aria-hidden="true" aria-label="전체 종목 검색">
+  <div class="ft-drawer-head">
+    <span class="ft-drawer-title">종목 검색</span>
+    <button type="button" class="ft-icon-btn" data-ft-close-drawer aria-label="검색 닫기">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
 
-/* Listview Styling */
-#stockViewTotal {
-    margin-top: 15px;
-}
-
-#stockViewTotal li {
-    border-bottom: 1px solid #eee;
-}
-
-#stockViewTotal li a {
-    color: #333;
-    font-weight: 500;
-    padding: 15px 12px;
-    display: block;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-#stockViewTotal li a:hover {
-    background-color: #f0f0f0;
-}
-
-/* Loader */
-.loader {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #3498db;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1.5s linear infinite;
-  margin: 20px auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Footer Info */
-.panel-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 15px;
-    background-color: #f1f1f1;
-    border-top: 1px solid #ddd;
-    font-size: 12px;
-    color: #555;
-    text-align: center;
-}
-
-</style>
-<script> 
-
-//상세
-function stockDitalMove(isNo , isNm) { 
-
-	location.href="https://cronya.pe.kr/stock/stockDetail.php?isNo="+isNo+"&isNm="+isNm;
-}
-
-//기본데이터 불러오기
-var isStockDateTotal= true;
-function stockDateTotal() { 
-  if(isStockDateTotal){
-   	$.ajax({ 
-  	    type: 'post',
-  	    dataType: 'text',
-  	    url: 'https://cronya.pe.kr/stock/include/stockTotalList.php', 
-  	    beforeSend: function() {
-            $('#stockViewTotal').html('<li><div class="loader"></div></li>');
-        },
-  	    success: function (data) { 
-  	        $('#stockViewTotal').html(data);
-  	        isStockDateTotal =false;
-  
-  	    },
-  	    error: function ( ) {
-  	    	alert( "한국거래소 실패.");
-  	    	$('#stockViewTotal').html('<li>데이터를 불러오는데 실패했습니다.</li>');
-  	    }
-  	});
-	}
-} 
-
-</script> 
-<div data-role="panel" class="jqm-search-panel" data-position="right" data-display="overlay" data-theme="a" role="region" aria-label="종목 검색 패널">   
-    <div class="jqm-search" style="padding: 10px;">
-        <?php // AD Area - You can place your ad banner here if needed ?>
-        <label for="stockViewTotal" class="ui-hidden-accessible">종목 검색 결과</label>
-        <ul id="stockViewTotal" class="jqm-list ui-listview" data-filter-placeholder="종목 이름 또는 코드로 검색" data-filter-reveal="true" aria-live="polite"> 
-            <!-- Stock list will be loaded here by AJAX -->
-        </ul>
+  <div class="ft-drawer-body">
+    <div class="ft-search-box" style="margin-bottom:0;">
+      <svg class="ft-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <label for="ftGlobalSearchInput" class="ui-hidden-accessible">종목 이름 또는 코드로 검색</label>
+      <input id="ftGlobalSearchInput" type="search" class="ft-search-input" placeholder="종목명 또는 시장명 입력.." autocomplete="off" />
     </div>
 
-    <div class="panel-footer">
-        광고문의: windmoter@gmail.com
-    </div>
-                           
-    <iframe id="iframeSearch" title="종목 검색 프레임" style="display:none; width: 100%; height: 100%; border: none;"></iframe>
-</div>
+    <ul id="stockViewTotal" class="ft-search-results" aria-live="polite">
+      <!-- AJAX loaded stock list -->
+    </ul>
+    <div id="ftGlobalSearchEmpty" class="ft-empty-state">검색 결과가 없습니다.</div>
+  </div>
+
+  <div class="ft-drawer-foot">
+    광고문의: windmoter@gmail.com
+  </div>
+
+  <iframe id="iframeSearch" title="종목 검색 프레임" style="display:none; width:100%; height:100%; border:none;"></iframe>
+</aside>
