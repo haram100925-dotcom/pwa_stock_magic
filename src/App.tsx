@@ -4,9 +4,14 @@ import { OfflineIndicator } from './components/OfflineIndicator';
 import { usePWAInstall } from './hooks/usePWAInstall';
 import { Download } from 'lucide-react';
 
+const BANNER_REFRESH_COOLDOWN_MS = 30_000; // 30 seconds minimum cooldown for AdSense policy compliance
+
 export default function App() {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const lastTriggeredDetailUrlRef = useRef<string>('');
+  const lastVisitedUrlRef = useRef<string>('');
+  const lastBannerRefreshRef = useRef<number>(Date.now());
+  const loadCountRef = useRef<number>(0);
   const triggerAdRef = useRef<(() => boolean) | null>(null);
   const mountTimeRef = useRef<number>(Date.now());
   const splashDismissedRef = useRef<boolean>(false);
@@ -14,6 +19,7 @@ export default function App() {
   const [isIframeLoading, setIsIframeLoading] = useState(true);
   const [showSplash, setShowSplash] = useState(true);
   const [splashFading, setSplashFading] = useState(false);
+  const [bannerRefreshKey, setBannerRefreshKey] = useState(0);
   const { isInstallable, install } = usePWAInstall();
 
   // The exact, canonical URL of the original webview site
@@ -51,50 +57,77 @@ export default function App() {
     };
   }, [dismissSplash]);
 
-  // Check current same-origin iframe URL and trigger interstitial ONLY when entering stockDetail.php
-  const checkIframeUrlForDetailAd = useCallback(() => {
+  // Refresh the bottom 50px banner on page navigation when 30s cooldown has elapsed
+  const refreshBannerIfReady = useCallback(() => {
+    const now = Date.now();
+    if (now - lastBannerRefreshRef.current >= BANNER_REFRESH_COOLDOWN_MS) {
+      lastBannerRefreshRef.current = now;
+      setBannerRefreshKey((k) => k + 1);
+    }
+  }, []);
+
+  // Check current same-origin iframe URL for both bottom banner refresh and stockDetail.php interstitial
+  const checkIframeNavigation = useCallback(() => {
     try {
       const win = iframeRef.current?.contentWindow;
       if (!win) return;
       const currentHref = win.location.href;
       if (!currentHref || currentHref === 'about:blank') return;
 
+      // 1. Bottom banner refresh on any page change (respecting 30s cooldown)
+      if (!lastVisitedUrlRef.current) {
+        lastVisitedUrlRef.current = currentHref;
+      } else if (lastVisitedUrlRef.current !== currentHref) {
+        lastVisitedUrlRef.current = currentHref;
+        refreshBannerIfReady();
+      }
+
+      // 2. Full-screen interstitial ONLY when entering stockDetail.php
       if (currentHref.includes('stockDetail.php')) {
         if (lastTriggeredDetailUrlRef.current !== currentHref) {
           lastTriggeredDetailUrlRef.current = currentHref;
           triggerAdRef.current?.();
         }
       } else {
-        // User left stockDetail.php (back to list/main), so next visit to any detail page triggers again
         lastTriggeredDetailUrlRef.current = '';
       }
     } catch {
       // Cross-origin access blocked (e.g. in preview environment) - ignore silently
     }
-  }, []);
+  }, [refreshBannerIfReady]);
 
   // Fast polling for same-origin iframe URL changes (catches stockDitalMove, links, history.back)
   useEffect(() => {
     const pollInterval = setInterval(() => {
-      checkIframeUrlForDetailAd();
+      checkIframeNavigation();
     }, 250);
 
     return () => clearInterval(pollInterval);
-  }, [checkIframeUrlForDetailAd]);
+  }, [checkIframeNavigation]);
 
   const handleIframeLoad = () => {
     setIsIframeLoading(false);
+    loadCountRef.current += 1;
     dismissSplash();
-    checkIframeUrlForDetailAd();
 
+    let checkedSameOrigin = false;
     try {
       const win = iframeRef.current?.contentWindow;
       if (win) {
-        win.addEventListener('pageshow', checkIframeUrlForDetailAd);
-        win.addEventListener('popstate', checkIframeUrlForDetailAd);
+        // Verify same-origin access works
+        void win.location.href;
+        checkedSameOrigin = true;
+        checkIframeNavigation();
+        win.addEventListener('pageshow', checkIframeNavigation);
+        win.addEventListener('popstate', checkIframeNavigation);
       }
     } catch {
       // Cross-origin preview environment
+    }
+
+    // Fallback for cross-origin preview: refresh bottom banner on subsequent iframe loads
+    if (!checkedSameOrigin && loadCountRef.current > 1) {
+      refreshBannerIfReady();
     }
   };
 
@@ -173,8 +206,8 @@ export default function App() {
         />
       </main>
 
-      {/* Bottom Ad Banner (50px fixed) + Stock Detail Interstitial Ad Manager */}
-      <AdBanner onAdMobReady={handleAdMobReady} />
+      {/* Bottom Ad Banner (50px fixed, refreshes on page change with 30s cooldown) + Stock Detail Interstitial */}
+      <AdBanner bannerKey={bannerRefreshKey} onAdMobReady={handleAdMobReady} />
     </div>
   );
 }

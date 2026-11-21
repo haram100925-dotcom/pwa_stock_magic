@@ -3,10 +3,11 @@ import { useAdMobBridge } from '../hooks/useAdMobBridge';
 import { X } from 'lucide-react';
 
 interface AdBannerProps {
+  bannerKey?: number;
   onAdMobReady?: (triggerFn: () => boolean) => void;
 }
 
-export const AdBanner: React.FC<AdBannerProps> = ({ onAdMobReady }) => {
+export const AdBanner: React.FC<AdBannerProps> = ({ bannerKey = 0, onAdMobReady }) => {
   const {
     interstitialActive,
     interstitialKey,
@@ -20,7 +21,7 @@ export const AdBanner: React.FC<AdBannerProps> = ({ onAdMobReady }) => {
   const adSlotId = '2118625088';
   const adContainerRef = useRef<HTMLDivElement | null>(null);
   const modalAdContainerRef = useRef<HTMLDivElement | null>(null);
-  const pushedRef = useRef<boolean>(false);
+  const lastPushedBannerKeyRef = useRef<number>(-1);
 
   // Register the trigger function to the parent (App.tsx)
   useEffect(() => {
@@ -29,9 +30,9 @@ export const AdBanner: React.FC<AdBannerProps> = ({ onAdMobReady }) => {
     }
   }, [onAdMobReady, handleDetailNavigation]);
 
-  // Bottom banner AdSense initialization (single execution guard)
+  // Bottom banner AdSense initialization & safe refresh when bannerKey increments
   useEffect(() => {
-    if (pushedRef.current) return;
+    if (lastPushedBannerKeyRef.current === bannerKey) return;
     if (!adContainerRef.current) return;
 
     const ins = adContainerRef.current.querySelector('ins.adsbygoogle');
@@ -42,12 +43,15 @@ export const AdBanner: React.FC<AdBannerProps> = ({ onAdMobReady }) => {
         const win = window as unknown as { adsbygoogle?: unknown[] };
         win.adsbygoogle = win.adsbygoogle || [];
         win.adsbygoogle.push({});
-        pushedRef.current = true;
+        lastPushedBannerKeyRef.current = bannerKey;
+
+        // If native Android bridge exists, also request banner refresh if supported
+        window.AndroidBridge?.showBanner?.('bottom');
       }
     } catch {
       // Ignore if AdSense blocked or already loaded
     }
-  }, []);
+  }, [bannerKey]);
 
   // Initialize full-screen AdSense unit inside the interstitial overlay whenever it opens
   useEffect(() => {
@@ -98,6 +102,7 @@ export const AdBanner: React.FC<AdBannerProps> = ({ onAdMobReady }) => {
           </div>
 
           <div
+            key={bannerKey}
             ref={adContainerRef}
             className="flex-1 flex items-center justify-center w-full min-w-0 h-[50px] max-h-[50px] overflow-hidden"
             style={{ height: '50px', maxHeight: '50px' }}
